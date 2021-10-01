@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css">  
+    
+<title>Heart Failure Prediction</title>
+<style>
+body, html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("/static/bg.png");
+  margin-top:50px;
+  min-height: 380px;
+  padding: 20px;
+  margin-bottom:20px;
+  opacity: 0.8;
+
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+label{
+font-size: 18px;
+}
+
+/* Add styles to the form form-horizontal */
+.form-horizontal {
+  
+  
+  margin: 20px;
+  max-width: 100%;
+  padding: 20px;
+  opacity: 0.8;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  font-size: 16px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: rgb(255, 255, 255);
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: black;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.colr{
+  color:#f1f1f1;
+}
+
+.btn:hover {
+  opacity: 1;
+  background-color: gray;
+}
+</style>
+</head>
+<body>
+
+<div class="container main">
+  <div class="jumbotron" id="holder">
+  
+  <center><b><h2 style="color:#FF0000";>{{ prediction_text}}</h2></b></center>
+
+<center><h1 class='main_heading'> Heart Failure Prediction Model</h1></center>
+<!-- <p>This Web Based Application is based on a Machine Learning Algorithm that predicts a patient's chance of having a heart failure or not. [Note that this model is 75% accurate]</p> -->
+<br>
+    <div class="instructions">
+      <h2>Instructions: </h2>
+      <p>1. Please Enter values for the following fields</p>
+      <p>2. Click Predict </p>
+    </div>
+    
+<div class="bg-img">
+  <!-- <img src="/static/bg.png"> -->
+
+<form class="form-horizontal" action="{{ url_for('predict')}}"method="post">
+    <h1 style="color:#f1f1f1">Heart Failure Prediction Model</h1><br><br>
+	
+	
+
+    <label for="Age" class="colr"><b>Age</b></label>
+    <input type= "text" name="age" placeholder="Enter Age" required="required" />
+
+    <label for="sex" class="colr"><b>Sex</b></label>
+    <input type="text" name="sex" placeholder="1 = male; 0 = female " required="required" />
+	
+	<label for="type" class="colr"><b>Chest Pain Type</b></label>
+	<input type="text" name="cp" placeholder="1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 0 = asymptomatic" required="required" />
+	
+	<label for="bloodPressure" class="colr"><b>Resting Blood Pressure</b></label>
+	<input type="text" name="trtbps" placeholder="In mm Hg" required="required" />
+	
+	<label for="cholestoral" class="colr"><b>Cholestoral (mg)</b></label>
+	<input type="text" name="chol" placeholder="In mg/dl" required="required" />
+	
+	<label for="bloodSugar" class="colr"><b>Fasting Blood Sugar</b></label>
+	<input type="text" name="fbs" placeholder="fasting blood sugar > 120 mg/dl (1 = true; 0 = false)" required="required" />
+	
+	<label for="result" class="colr"><b>Resting Electrocardiographic Result</b></label>
+	<input type="text" name="restecg" placeholder="1 = normal; 2 = having ST-T wave abnormality; 0 = hypertrophy" required="required" />
+	
+	<label for="rate" class="colr"><b>Maximum heart rate</b></label>
+	<input type="text" name="thalachh" placeholder="Enter Heart Rate" required="required" />
+	
+	<label for="exng" class="colr"><b>Exercise induced angina </b></label>
+	<input type="text" name="exng" placeholder="1 = yes; 0 = no" required="required" />
+	
+	<label for="oldpeak" class="colr"><b>ST depression induced by exercise relative to rest(oldpeak)</b></label>
+	<input type="text" name="oldpeak" placeholder="oldpeak" required="required" />
+	
+	<label for="slp" class="colr"><b>Slope of the peak exercise ST segment</b></label>
+	<input type="text" name="slp" placeholder="2= upsloping; 1 = flat; 0 = downsloping" required="required" />
+	
+	<label for="caa" class="colr"><b>Number of major vessels (0-3) colored by flourosopy</b></label>
+	<input type="text" name="caa" placeholder="0-3" required="required" />
+	
+	<label for="thall" class="colr"><b>thall</b></label>
+	<input type="text" name="thall" placeholder=" 2 = normal; 1 = fixed defect; 3 = reversable defect" required="required" />
+	
+	
+
+    <button type="submit" class="btn" >PREDICT</button>
+  </form>
+  <div>
+  </div>
+  </div class="asd">
+  <form  action="{{ url_for('visual')}}"method="post">
+      <center><button type="submit" class="button btn btn-default">VISUAL</button><center/>
+
+  </form>
+
+    
+
+
+    <h2 class="result">{{prediction_text}}</h2>
+  
+
+ </div>
+  </div>
+
+
+</body>
+
+</html>
