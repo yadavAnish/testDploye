@@ -10,4 +10,7 @@ matplotlib
 pandas
 seaborn
 numpy
-
+sklearn
+scipy
+warnings
+re
