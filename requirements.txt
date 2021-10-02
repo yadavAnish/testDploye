@@ -12,5 +12,4 @@ seaborn
 numpy
 sklearn
 scipy
-warnings
-re
+sklearn
